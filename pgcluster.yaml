@@ -1,0 +1,63 @@
+---
+apiVersion: crunchydata.com/v1
+kind: Pgcluster
+metadata:
+  annotations:
+    current-primary: ${pgo_cluster_name}
+  labels:
+    crunchy-pgha-scope: ${pgo_cluster_name}
+    deployment-name: ${pgo_cluster_name}
+    name: ${pgo_cluster_name}
+    pg-cluster: ${pgo_cluster_name}
+    pgo-version: 4.7.0
+    pgouser: admin
+  name: ${pgo_cluster_name}
+  namespace: ${PGO_NAMESPACE}
+spec:
+  BackrestStorage:
+    accessmode: ReadWriteOnce
+    matchLabels: ""
+    name: ""
+    size: 5Gi
+    storageclass: "local-path"
+    storagetype: dynamic
+    supplementalgroups: ""
+  PrimaryStorage:
+    accessmode: ReadWriteOnce
+    matchLabels: ""
+    name: ${pgo_cluster_name}
+    size: 5Gi
+    storageclass: "local-path"
+    storagetype: dynamic
+    supplementalgroups: ""
+  ReplicaStorage:
+    accessmode: ReadWriteOnce
+    matchLabels: ""
+    name: ""
+    size: 5Gi
+    storageclass: "local-path"
+    storagetype: dynamic
+    supplementalgroups: ""
+  annotations: {}
+  ccpimage: crunchy-postgres-ha
+  ccpimageprefix: ${cluster_image_prefix}
+  ccpimagetag: centos8-13.3-4.7.0
+  clustername: ${pgo_cluster_name}
+  database: ${pgo_cluster_name}
+  exporterport: "9187"
+  limits: {}
+  name: ${pgo_cluster_name}
+  pgDataSource:
+    restoreFrom: ""
+    restoreOpts: ""
+  pgbadgerport: "10000"
+  pgoimageprefix: ${cluster_image_prefix}
+  podAntiAffinity:
+    default: preferred
+    pgBackRest: preferred
+    pgBouncer: preferred
+  port: "5432"
+  tolerations: []
+  user: hippo
+  userlabels:
+    pgo-version: 4.7.0

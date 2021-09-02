@@ -3,16 +3,16 @@ apiVersion: crunchydata.com/v1
 kind: Pgcluster
 metadata:
   annotations:
-    current-primary: ${pgo_cluster_name}
+    current-primary: my-sample-db
   labels:
-    crunchy-pgha-scope: ${pgo_cluster_name}
-    deployment-name: ${pgo_cluster_name}
-    name: ${pgo_cluster_name}
-    pg-cluster: ${pgo_cluster_name}
+    crunchy-pgha-scope: my-sample-db
+    deployment-name: my-sample-db
+    name: my-sample-db
+    pg-cluster: my-sample-db
     pgo-version: 4.7.0
     pgouser: admin
-  name: ${pgo_cluster_name}
-  namespace: ${PGO_NAMESPACE}
+  name: my-sample-db
+  namespace: pgo
 spec:
   BackrestStorage:
     accessmode: ReadWriteOnce
@@ -25,7 +25,7 @@ spec:
   PrimaryStorage:
     accessmode: ReadWriteOnce
     matchLabels: ""
-    name: ${pgo_cluster_name}
+    name: my-sample-db
     size: 5Gi
     storageclass: "local-path"
     storagetype: dynamic
@@ -40,18 +40,18 @@ spec:
     supplementalgroups: ""
   annotations: {}
   ccpimage: crunchy-postgres-ha
-  ccpimageprefix: ${cluster_image_prefix}
+  ccpimageprefix: registry.developers.crunchydata.com/crunchydata
   ccpimagetag: centos8-13.3-4.7.0
-  clustername: ${pgo_cluster_name}
-  database: ${pgo_cluster_name}
+  clustername: my-sample-db
+  database: my-sample-db
   exporterport: "9187"
   limits: {}
-  name: ${pgo_cluster_name}
+  name: my-sample-db
   pgDataSource:
     restoreFrom: ""
     restoreOpts: ""
   pgbadgerport: "10000"
-  pgoimageprefix: ${cluster_image_prefix}
+  pgoimageprefix: registry.developers.crunchydata.com/crunchydata
   podAntiAffinity:
     default: preferred
     pgBackRest: preferred
